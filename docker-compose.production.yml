@@ -1,0 +1,19 @@
+version: "3.8"
+
+services:
+  web:
+    image: rv369/project_2025.04.19:latest
+    command: python bot.py
+    volumes:
+      - documents:/app/documents
+      - db:/app/db
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    restart: always
+
+volumes:
+  documents:
+  db:
+  
