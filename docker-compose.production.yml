@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   web:
-    image: rv369/project_2025.04.19:latest
+    image: rv369/project_20250419-web:latest
     command: python bot.py
     volumes:
       - documents:/app/documents
