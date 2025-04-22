@@ -25,12 +25,12 @@ dp = Dispatcher(bot)
 @dp.message_handler(commands="start")
 async def cmd_start(message: types.Message):
     keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
-    buttons = ['/upload_a_file']
+    buttons = ['/upload_file']
     keyboard.add(*buttons)
     await message.reply('Загрузить файл>>', reply_markup=keyboard)
 
 
-@dp.message_handler(commands=['upload_a_file'])
+@dp.message_handler(commands=['upload_file'])
 async def send_file(message: types.Message):
     file = open('documents/Лист Microsoft Excel.xlsx', 'rb')
     kwargs = await read_file_excel(file)
