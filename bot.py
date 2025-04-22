@@ -3,7 +3,7 @@ import logging
 import os
 
 from aiogram import Bot, Dispatcher, executor, types
-
+from aiogram.dispatcher.filters import Text
 
 from utils.config_reader import config
 from utils.core import read_file_excel
@@ -25,12 +25,12 @@ dp = Dispatcher(bot)
 @dp.message_handler(commands="start")
 async def cmd_start(message: types.Message):
     keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
-    buttons = ['/upload_file']
+    buttons = ['Загрузить файл']
     keyboard.add(*buttons)
     await message.reply('Загрузить файл>>', reply_markup=keyboard)
 
 
-@dp.message_handler(commands=['upload_file'])
+@dp.message_handler(Text(equals='Загрузить файл'))
 async def send_file(message: types.Message):
     file = open('documents/Лист Microsoft Excel.xlsx', 'rb')
     kwargs = await read_file_excel(file)
