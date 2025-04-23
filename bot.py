@@ -22,7 +22,7 @@ bot = Bot(token=config.bot_token.get_secret_value())
 dp = Dispatcher(bot)
 
 
-@dp.message_handler(commands="start")
+@dp.message_handler(commands='start')
 async def cmd_start(message: types.Message):
     keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
     buttons = ['Загрузить файл']
@@ -32,12 +32,13 @@ async def cmd_start(message: types.Message):
 
 @dp.message_handler(Text(equals='Загрузить файл'))
 async def send_file(message: types.Message):
-    file = open('documents/Лист Microsoft Excel.xlsx', 'rb')
+    file = open(f'{UPLOAD_FOLDER}Лист Microsoft Excel.xlsx', 'rb')
     kwargs = await read_file_excel(file)
     await Repozitory.get_or_create(Zuzubliks, **kwargs)
     await message.reply_document(file)
     await message.reply(
-        f'title {kwargs["title"]} url {kwargs["url"]} '
+        f'title {kwargs["title"]} '
+        f'url {kwargs["url"]} '
         f'xpath {kwargs["xpath"]}',
     )
 
@@ -53,7 +54,8 @@ async def get_docs(message: types.Message):
     kwargs = await read_file_excel(destination)
     await Repozitory.get_or_create(Zuzubliks, **kwargs)
     await message.reply(
-        f'title {kwargs["title"]} url {kwargs["url"]} '
+        f'title {kwargs["title"]} '
+        f'url {kwargs["url"]} '
         f'xpath {kwargs["xpath"]}',
     )
 
