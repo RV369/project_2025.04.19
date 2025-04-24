@@ -44,6 +44,15 @@ class Repozitory:
                 return instance
 
     @classmethod
+    async def create(self, model, **kwargs):
+        async with new_session() as session:
+            instance = model(**kwargs)
+            session.add(instance)
+            await session.flush()
+            await session.commit()
+            return instance
+
+    @classmethod
     async def create_tables(self):
         async with engine.begin() as conn:
             await conn.run_sync(Base.metadata.create_all)

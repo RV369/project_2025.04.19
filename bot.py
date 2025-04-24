@@ -34,7 +34,7 @@ async def cmd_start(message: types.Message):
 async def send_file(message: types.Message):
     file = open(f'{UPLOAD_FOLDER}Лист Microsoft Excel.xlsx', 'rb')
     kwargs = await read_file_excel(file)
-    await Repozitory.get_or_create(Zuzubliks, **kwargs)
+    await Repozitory.create(Zuzubliks, **kwargs)
     await message.reply_document(file)
     await message.reply(
         f'title {kwargs["title"]} '
@@ -52,7 +52,7 @@ async def get_docs(message: types.Message):
     destination = os.path.join(UPLOAD_FOLDER, filename)
     await bot.download_file(file_path, destination)
     kwargs = await read_file_excel(destination)
-    await Repozitory.get_or_create(Zuzubliks, **kwargs)
+    await Repozitory.create(Zuzubliks, **kwargs)
     await message.reply(
         f'title {kwargs["title"]} '
         f'url {kwargs["url"]} '
