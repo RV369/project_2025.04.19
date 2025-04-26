@@ -13,4 +13,4 @@ docker compose -f docker-compose.production.yml up
 ```sh
 docker compose up --build
 ```
-- файл можно загрузить при помощи кнопки 'Загрузить файл' или скрепкой выбрать файл ExampleExcel.xlsx.
+- файл можно загрузить при помощи кнопки 'Загрузить файл' или скрепкой выбрать файл ExampleExcel.xlsx
